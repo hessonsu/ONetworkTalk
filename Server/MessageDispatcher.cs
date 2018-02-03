@@ -137,7 +137,7 @@ namespace ONetworkTalk.Server
                     LoginContract loginContract = LoginContract.Parser.ParseFrom(message.BodyContent);
                     string cause;
                     LoginResultContract result = null;
-                    bool verResult = basicHandler.VerifyUser(loginContract.Uid, loginContract.Pwd, loginContract.VerCode, out cause);
+                    bool verResult = basicHandler.VerifyUser(loginContract,request.Channel,out cause);
                     this.basicController.userManager.Add(loginContract.Uid, request.Channel);
                     result = new LoginResultContract()
                     {

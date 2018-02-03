@@ -3,6 +3,8 @@ using ONetworkTalk.Utility;
 using ONetworkTalk.Codecs;
 using ONetworkTalk.Contract;
 using System.Collections.Generic;
+using System;
+
 namespace ONetworkTalk.Client
 {
     /// <summary>
@@ -29,6 +31,12 @@ namespace ONetworkTalk.Client
             var message = MessageCreater.CreateNormalMessage(GloblParams.CurrentClientID, contractID, body);
 
             messageBus.SendMessage(message);
+        }
+        public void Send<T>(int contractID,Action<T> action, IMessage body = null)where T:IMessage<T>,new()
+        {
+            var message = MessageCreater.CreateNormalMessage(GloblParams.CurrentClientID, contractID, body);
+
+            messageBus.SendMessage(message,action);
         }
 
         public void SendCertainly(string destID, int contractID, IMessage body = null)

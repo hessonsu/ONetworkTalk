@@ -1,9 +1,9 @@
 D:\Git2018\ONetworkTalk\bin\Release\netstandard2.0\ONetworkTalk.deps.json
 D:\Git2018\ONetworkTalk\bin\Release\netstandard2.0\ONetworkTalk.dll
 D:\Git2018\ONetworkTalk\bin\Release\netstandard2.0\ONetworkTalk.pdb
-D:\Git2018\ONetworkTalk\obj\Release\netstandard2.0\ONetworkTalk.csprojResolveAssemblyReference.cache
 D:\Git2018\ONetworkTalk\obj\Release\netstandard2.0\ONetworkTalk.csproj.CoreCompileInputs.cache
 D:\Git2018\ONetworkTalk\obj\Release\netstandard2.0\ONetworkTalk.AssemblyInfoInputs.cache
 D:\Git2018\ONetworkTalk\obj\Release\netstandard2.0\ONetworkTalk.AssemblyInfo.cs
 D:\Git2018\ONetworkTalk\obj\Release\netstandard2.0\ONetworkTalk.dll
 D:\Git2018\ONetworkTalk\obj\Release\netstandard2.0\ONetworkTalk.pdb
+D:\Git2018\ONetworkTalk\obj\Release\netstandard2.0\ONetworkTalk.csprojResolveAssemblyReference.cache

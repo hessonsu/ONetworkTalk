@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DotNetty.Transport.Channels;
+using ONetworkTalk.Contract;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +10,6 @@ namespace ONetworkTalk.Handler
 {
     public interface IBasicHandler
     {
-        bool VerifyUser(string userID, string password, string verCode, out string failureCause);
+        bool VerifyUser(LoginContract loginContract,IChannel channel,out string failureCause);
     }
 }

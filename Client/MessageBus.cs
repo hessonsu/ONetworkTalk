@@ -109,6 +109,26 @@ namespace ONetworkTalk.Client
         {
             this.channel.WriteAndFlushAsync(message.ToByteBuffer(this.channel.Allocator.Buffer()));
         }
+        internal void SendMessage<T>(MessagePacket message, Action<T> action)where T:IMessage<T>,new()
+        {
+            TaskCompletionSource<byte[]> taskCompletionSource = new TaskCompletionSource<byte[]>();
+            this.messageBag.TryAdd(message.MessageHeader.MessageID, taskCompletionSource);
+            this.channel.WriteAndFlushAsync(message.ToByteBuffer(this.channel.Allocator.Buffer()));
+            taskCompletionSource.Task.ContinueWith((bytes) =>
+            {
+                MessageParser<T> messageParser = new MessageParser<T>(() => new T());
+                T t= messageParser.ParseFrom(bytes.Result);
+                action(t);
+            });
+            //if (!taskCompletionSource.Task.Wait(GloblParams.WaitReplyTimeoutInSecs))
+            //{
+            //    this.messageBag.TryRemove(message.MessageHeader.MessageID, out taskCompletionSource);
+            //    throw new TimeoutException("timeout, cause by waiting for reply ！");
+            //}
+            //this.messageBag.TryRemove(message.MessageHeader.MessageID, out taskCompletionSource);
+            //var taskCompletionSource.Task.Result;
+
+        }
         internal void SendMessage(List<MessagePacket> messages)
         {
             foreach (MessagePacket current in messages)
