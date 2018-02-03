@@ -3,7 +3,6 @@ using ONetworkTalk.Utility;
 using ONetworkTalk.Codecs;
 using ONetworkTalk.Contract;
 using System.Collections.Generic;
-
 namespace ONetworkTalk.Client
 {
     /// <summary>
@@ -105,11 +104,25 @@ namespace ONetworkTalk.Client
             return messageBus.SendAckMessage(message);
         }
 
+        public T Query<T>(string destID, int contractID, IMessage body = null)where T : IMessage<T>,new()
+        {
+            byte[] result = this.Query(destID, contractID, body);
+            MessageParser<T> messageParser = new MessageParser<T>(() => new T());
+            return messageParser.ParseFrom(result);
+        }
+
         public byte[] Query(int contractID, IMessage body = null)
         {
             var message = MessageCreater.CreateQueryMessage(GloblParams.CurrentClientID, contractID, body);
 
             return messageBus.SendAckMessage(message);
+        }
+
+        public T Query<T>(int contractID, IMessage body = null) where T : IMessage<T>, new()
+        {
+            byte[] result = this.Query(contractID, body);
+            MessageParser<T> messageParser = new MessageParser<T>(() => new T());
+            return messageParser.ParseFrom(result);
         }
 
         internal byte[] Query(MessagePacket message)
